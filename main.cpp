@@ -13,6 +13,8 @@ int main()
     window.setVerticalSyncEnabled (true);
     window.setKeyRepeatEnabled(false);
 
+    
+
     // rectangle
     Rect r1(0, 0, 300, 300);
 
@@ -21,6 +23,8 @@ int main()
     Vector2u WindowSize;
     Sprite background;
     Texture backgroundTexture;
+    float ScaleX;
+    float ScaleY;
         if (!backgroundTexture.loadFromFile("Map1.jpg")){
                 cerr << "failed to load image" << endl;
                 exit(1);
@@ -29,8 +33,8 @@ int main()
             TextureSize = backgroundTexture.getSize(); //Get size of texture.
             WindowSize = window.getSize();             //Get size of window.
 
-            float ScaleX = (float) WindowSize.x / TextureSize.x;
-            float ScaleY = (float) WindowSize.y / TextureSize.y;    // Calculate scale
+            ScaleX = (float) WindowSize.x / TextureSize.x;
+            ScaleY = (float) WindowSize.y / TextureSize.y;    // Calculate scale
 
             background.setTexture(backgroundTexture);
             background.setScale(ScaleX, ScaleY);    // Set scale
@@ -119,7 +123,51 @@ int main()
 
         window.draw(background);
 
+        //////////////////////////////////////////////////////
+
+        Sprite HG_1;
+        Texture HG_1_Texture;
+        HG_1_Texture.loadFromFile("map/gauche_haut_1.png");
+
+        HG_1.setTexture(HG_1_Texture);
+        HG_1.setScale(ScaleX*1.76, ScaleY*1.76);
+
+        Sprite HG_2;
+        Texture HG_2_Texture;
+        HG_2_Texture.loadFromFile("map/gauche_haut_2.png");
+
+        HG_2.setTexture(HG_2_Texture);
+        HG_2.setScale(ScaleX*1.76, ScaleY*1.76);
+        
+        HG_2.setPosition(HG_1_Texture.getSize().x*HG_1.getScale().x,0);
+
+        Sprite HG_3;
+        Texture HG_3_Texture;
+        HG_3_Texture.loadFromFile("map/gauche_haut_3.png");
+
+        HG_3.setTexture(HG_3_Texture);
+        HG_3.setScale(ScaleX*1.76, ScaleY*1.76);
+
+        HG_3.setPosition((HG_1_Texture.getSize().x*HG_1.getScale().x)+(HG_2_Texture.getSize().x*HG_2.getScale().x),0);
+
+
+
+        // récupération de la boîte englobante de l'entité
+        sf::FloatRect boundingBox = sprite1.getGlobalBounds();
+
+
+        // test de collision avec un autre rectangle (comme par exemple la boîte englobante d'une autre entité)
+        sf::FloatRect otherBox = HG_1.getGlobalBounds();
+        if (boundingBox.intersects(otherBox))
+        {
+            cout << "Collision" << endl;
+        }
+        
+        //////////////////////////////////////////////////////
+
         // Rotate and draw the sprite1
+
+        
         sprite1.setPosition(x,y);
         sprite1.setRotation(sprite1Rotation);
         window.draw(sprite1);
