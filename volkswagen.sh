@@ -1,2 +1,2 @@
-g++ -c $1
-g++ $2 -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
+g++ -c main.cpp
+g++ main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
