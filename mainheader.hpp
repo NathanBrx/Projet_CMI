@@ -44,3 +44,12 @@ class Projectile : public Sprite {
         int Xlimite;
         int Ylimite;
 };
+
+class Background {
+    public :
+
+        Background(Sprite backgroundSprite);
+
+        sf::RectangleShape Background::createRectangle(sf::Vector2f bottomLeft, sf::Vector2f bottomRight, sf::Color color);
+        Sprite backgroundSprite ; //attribut sprite du background
+};

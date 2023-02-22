@@ -40,3 +40,26 @@ void Perso::speed_modif(int speed){
 Projectile::Projectile(float x,float y,float direction,int vitesse,Sprite projectileSprite):
     x(x),y(y),direction(direction),vitesse(vitesse),projectileSprite(projectileSprite)
 {}
+
+
+Background::Background(Sprite backgroundSprite):
+    backgroundSprite(backgroundSprite)
+{}
+
+sf::RectangleShape Background::createRectangle(sf::Vector2f bottomLeft, sf::Vector2f bottomRight, sf::Color color)
+{
+    // Calculer la longueur et l'angle du rectangle
+    float length = std::sqrt(std::pow(bottomRight.x - bottomLeft.x, 2) + std::pow(bottomRight.y - bottomLeft.y, 2));
+    float angle = std::atan2(bottomRight.y - bottomLeft.y, bottomRight.x - bottomLeft.x);
+
+    // Créer le rectangle
+    sf::RectangleShape rectangle;
+    rectangle.setSize(sf::Vector2f(length, 1.f));
+    rectangle.setRotation(angle * 180.f / 3.14159f);
+    rectangle.setFillColor(color);
+
+    // Positionner le rectangle en utilisant le coin inférieur gauche
+    rectangle.setPosition(bottomLeft.x, bottomLeft.y - rectangle.getSize().y);
+
+    return rectangle;
+}
