@@ -42,8 +42,8 @@ Projectile::Projectile(float x,float y,float direction,int vitesse,Sprite projec
 {}
 
 
-Background::Background(Sprite backgroundSprite):
-    backgroundSprite(backgroundSprite)
+Background::Background(Sprite backgroundSprite, Texture backgroundTexture,std::vector<sf::Vector2f> borduresPoints, std::vector<sf::Vector2f> portesPoints):
+    backgroundSprite(backgroundSprite), backgroundTexture(backgroundTexture), borduresPoints(borduresPoints), portesPoints(portesPoints)
 {}
 
 sf::RectangleShape Background::createRectangle(sf::Vector2f bottomLeft, sf::Vector2f bottomRight, sf::Color color)
@@ -63,3 +63,21 @@ sf::RectangleShape Background::createRectangle(sf::Vector2f bottomLeft, sf::Vect
 
     return rectangle;
 }
+
+void Background::setBackground(float ScaleX, float ScaleY){
+    
+    if (!backgroundText.loadFromFile(this->backgroundTexture)){
+            cerr << "failed to load map texture" << endl;
+            exit(1);
+    }
+    else{
+
+        this->backgroundSprite.setTexture(backgroundText); // Set textures
+        this->backgroundSprite.setScale(ScaleX, ScaleY);    // Set scales
+        
+    }
+    backgroundText.setRepeated(false);
+
+}
+
+

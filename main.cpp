@@ -14,15 +14,14 @@ int main()
     window.setVerticalSyncEnabled (true);
     window.setKeyRepeatEnabled(false);
 
-    // background texture
     Vector2u TextureSize;
     Vector2u WindowSize;
-    Sprite background, spriteMain, projectile1;
+    Sprite backgroundSprite, spriteMain, projectile1;
     Texture backgroundTexture, textureMain, textureProjectile;
-        if (!backgroundTexture.loadFromFile("Map1.jpg")){
-                cerr << "failed to load map texture" << endl;
-                exit(1);
-        }
+
+    Background background(backgroundSprite,backgroundTexture);
+        
+    
         if (!textureMain.loadFromFile("Spritev1.png")){
             cerr << "failed to load spriteMain texture" << endl;
             exit(1);
@@ -38,8 +37,7 @@ int main()
             float ScaleX = (float) WindowSize.x / TextureSize.x;
             float ScaleY = (float) WindowSize.y / TextureSize.y;    // Calculate scale
 
-            background.setTexture(backgroundTexture); // Set textures
-            background.setScale(ScaleX, ScaleY);    // Set scales
+            background.setBackground(ScaleX,ScaleY);
             
             spriteMain.setTexture(textureMain);
             spriteMain.setScale(ScaleX,ScaleY);
@@ -47,7 +45,6 @@ int main()
             projectile1.setTexture(textureProjectile);
             projectile1.setScale(ScaleX,ScaleY);
         }
-    backgroundTexture.setRepeated(false);
 
     textureMain.setRepeated(false);
     textureMain.setSmooth(true);

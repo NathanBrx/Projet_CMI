@@ -51,5 +51,12 @@ class Background {
         Background(Sprite backgroundSprite);
 
         sf::RectangleShape Background::createRectangle(sf::Vector2f bottomLeft, sf::Vector2f bottomRight, sf::Color color);
+        void Background::setBackground(float ScaleX, float ScaleY);
         Sprite backgroundSprite ; //attribut sprite du background
+        Texture backgroundTexture; //attribut texture du background
+
+        // Créer des points pour définir les rectangles
+        std::vector<sf::Vector2f> borduresPoints;
+        std::vector<sf::Vector2f> portesPoints;
+        
 };
